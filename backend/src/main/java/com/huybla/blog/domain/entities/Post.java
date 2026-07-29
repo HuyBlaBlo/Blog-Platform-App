@@ -38,6 +38,10 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime updateAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id" ,nullable = false)
+    private User author;
+
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
@@ -60,6 +64,4 @@ public class Post {
     protected  void onUpdate(){
         this.updateAt = LocalDateTime.now();
     }
-
-    private  
 }
