@@ -17,7 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> listCategory() {
-        return categoryRepository.findAll();
+    public List<Category> listCategories() {
+        return categoryRepository.findAllWithPostCount();
     }
 }
