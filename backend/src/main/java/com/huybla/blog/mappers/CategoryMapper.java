@@ -2,6 +2,7 @@ package com.huybla.blog.mappers;
 
 import com.huybla.blog.domain.PostStatus;
 import com.huybla.blog.domain.dtos.CategoryDto;
+import com.huybla.blog.domain.dtos.CreateCategoryRequest;
 import com.huybla.blog.domain.entities.Category;
 import com.huybla.blog.domain.entities.Post;
 
@@ -17,6 +18,8 @@ public interface CategoryMapper {
 
     @Mapping(target = "postCount", source = "posts", qualifiedByName = "calculatePostCount")
     CategoryDto toDto(Category category);
+
+    Category toEntity(CreateCategoryRequest categoryRequest);
 
     @Named("calculatePostCount")
     default long calculatePostCount(List<Post> posts){

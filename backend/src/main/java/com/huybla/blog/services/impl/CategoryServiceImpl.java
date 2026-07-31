@@ -4,6 +4,7 @@ import com.huybla.blog.domain.entities.Category;
 import com.huybla.blog.repositories.CategoryRepository;
 import com.huybla.blog.services.CategoryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,5 +20,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> listCategories() {
         return categoryRepository.findAllWithPostCount();
+    }
+
+    @Override
+    @Transactional
+    public Category createCategory(Category category) {
+        if(categoryRepository.existsByNameIgnoreCase(category.getName())){
+            throw new IllegalArgumentException("Category already exists with name : " + category.getName());
+        }
+        return categoryRepository.save(category);
     }
 }
