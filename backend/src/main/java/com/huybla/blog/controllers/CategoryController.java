@@ -33,7 +33,7 @@ public class CategoryController {
 
     // POST /api/v1/posts Create a new post
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@Valid  @RequestBody CreateCategoryRequest categoryRequest){
+    public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CreateCategoryRequest categoryRequest){
         Category categoryToCreate = this.categoryMapper.toEntity(categoryRequest);
 
         Category saveCategory = categoryService.createCategory(categoryToCreate);

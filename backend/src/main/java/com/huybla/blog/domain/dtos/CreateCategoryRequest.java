@@ -16,8 +16,7 @@ public class CreateCategoryRequest {
 
     @NotBlank(message = "Category name is required")
     @Size(min = 2, max = 50, message = "Category name must be between {min} and {max} characters")
-    @Pattern(regexp = "^[\\w\\s]+%", message = "category name can be only letters, numbers, spaces")
+    @Pattern(regexp = "^[\\w\\s]+$", message = "category name can be only letters, numbers, spaces")
     private String name;
-
 
 }
