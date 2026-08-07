@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/categories")
@@ -22,7 +23,7 @@ public class CategoryController {
 
     private final CategoryMapper categoryMapper;
 
-    // get all category
+    // GET /api/v1/categories: get all category
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAllCategory(){
         List<CategoryDto> listCategories = this.categoryService.listCategories()
@@ -31,7 +32,7 @@ public class CategoryController {
         return ResponseEntity.ok(listCategories);
     }
 
-    // POST /api/v1/posts Create a new post
+    // POST /api/v1/categories: Create a new post
     @PostMapping
     public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CreateCategoryRequest categoryRequest){
         Category categoryToCreate = this.categoryMapper.toEntity(categoryRequest);
@@ -42,5 +43,12 @@ public class CategoryController {
           this.categoryMapper.toDto(saveCategory),
                 HttpStatus.CREATED
         );
+    }
+
+    // DELETE /api/v1/categories/{id}
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deteleCategory(@PathVariable UUID id){
+        categoryService.deleteCategory(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
